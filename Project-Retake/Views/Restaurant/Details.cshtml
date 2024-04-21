@@ -1,0 +1,182 @@
+﻿﻿@using System.Text
+@model RestaurantDetailsViewModel
+
+
+@{
+    ViewBag.Title = Model.Name;
+    var images = Model.ImageUrl;
+}
+
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="container" style="display:inline">
+    <div class="row">
+        <div class="col-4">
+            <div class="mb-5"></div>
+
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    @for (int i = 0; i < images.Count(); i++)
+                    {
+                        <div class="carousel-item @(i == 0 ? "active" : string.Empty)">
+                            <img class="card-img" style="width: 25rem; height: 20rem; margin-bottom: 40px;"
+                                 src="@images[i]">
+                        </div>
+                    }
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+                <div class="form-inline">
+                    <form method="post" asp-controller="Comment" asp-action="AddComment">
+
+                        <h5 class="card-title"><b>Коментари:</b></h5>
+                        @foreach (var comment in Model.Comments)
+                        {
+                            <div class="card" style="width: 25rem; margin-bottom: 20px;">
+                                <p>
+                                    <strong>Име:</strong> @comment.UserName <strong>Рейтинг:</strong>
+                                    <span>
+                                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+                                        <style>
+                                            .checked {
+                                                color: orange;
+                                            }
+
+                                        </style>
+                                        @for (int i = 0; i < comment.Rating; i++)
+                                        {
+                                            <span class="fa fa-star checked"></span>
+                                        }
+                                    </span>
+
+                                </p>
+                                <p>@comment.info</p>
+                            </div>
+
+
+                        }
+                        <textarea name="commentText" class="form-control" aria-required="true" rows="4" style="width: 25rem;"></textarea>
+                        <input type="hidden" name="restaurantId" value="@Model.Id" />
+                        <label for="rating">Рейтинг:</label>
+                        <input type="number" name="rating" id="rating" min="1" max="5" class="form-control" style="width: 5rem;" required>
+                        <button type="submit" class="btn-primary p-2 fw-bold" style="width: 25rem;">Добави коментар</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card col-8 border-0">
+            <p><strong>Адрес:</strong>@Model.Address</p>
+            <p>
+                @{
+                    var description = Model.Description;
+                    var maxCharsPerLine = 100;
+                    var lines = new List<string>();
+
+                    var words = description.Split(' ');
+                    var currentLine = new StringBuilder();
+
+                    foreach (var word in words)
+                    {
+                        if (currentLine.Length + word.Length < maxCharsPerLine)
+                        {
+                            currentLine.Append(word + " ");
+                        }
+                        else
+                        {
+                            lines.Add(currentLine.ToString().Trim());
+                            currentLine.Clear();
+                            currentLine.Append(word + " ");
+                        }
+                    }
+
+                    if (currentLine.Length > 0)
+                    {
+                        lines.Add(currentLine.ToString().Trim());
+                    }
+                }
+
+                @foreach (var line in lines)
+                {
+                    <span>@line</span>
+
+                    <br style="line-height: 0;">
+                }
+            </p>
+            <p style="margin-bottom: 10px;"><strong>Вид на ресторанта:</strong> @Model.Category</p>
+            <p style="margin-bottom: 40px;"><strong>Град:</strong> @Model.City</p>
+            @if (!string.IsNullOrEmpty(Model.GoogleMaps) && Uri.IsWellFormedUriString(Model.GoogleMaps, UriKind.Absolute))
+            {
+                <iframe src="@Model.GoogleMaps" style="width: 35rem; height: 30rem;" loading="lazy"></iframe>
+            }
+            else
+            {
+                <p>Грешка: Невалиден линк към Google Maps</p>
+            }
+
+
+            <div class="card" style="width: 18rem; position: absolute; top: 0; right: -25%;">
+                <div class="card-body">
+                    <h5 class="card-title"><b>Ресторантьор:</b></h5>
+                    <p class="card-text">Име:  @Model.FullName</p>
+                    <p class="card-text">Email: @Model.Email </p>
+                    <p class="card-text">Телефон: @Model.PhoneNumber</p>
+
+                    <p>
+                        @if (User.Identity.Name == Model.UserName || User.IsInRole(AdminRole))
+                        {
+                            <div style="position: relative;">
+                                <a asp-controller="Restaurant" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-info mb-2 w-48 p-3 fw-bold" style="position: absolute; left: -78.5rem; top: -11.5rem;">Edit the Restaurant</a>
+
+                                <a asp-controller="Restaurant" asp-action="DeleteRestaurant" asp-route-id="@Model.Id" class="btn btn-danger mb-2 w-30 p-3 fw-bold" style="position: absolute; left: -67rem; top: -11.5rem;">Delete</a>
+                            </div>
+                        }
+                    </p>
+
+
+                </div>
+            </div>
+            <form method="post" asp-controller="Reservation" asp-action="Reservation">
+                <div class="card" style="width: 18rem; position: absolute; top: 13rem; right: -25%;">
+                    <div class="card-body">
+                        <p>
+                            <label for="name">Име:</label><br>
+                            <input type="text" id="name" name="name" required />
+
+                        </p>
+                        <p>
+                            <label for="surname">Фамилия:</label>
+                            <input type="text" id="surname" name="surname" required />
+                        </p>
+                        <p>
+                            <label for="phone">Телефон:</label>
+                            <input type="tel" id="phone" name="phone" required />
+                        </p>
+                        <p>
+                            <label for="date">Дата:</label>
+                            <input type="date" id="date" name="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                        </p>
+                        <p>
+                            <label for="start">Час на пристигане:</label>
+                            <input type="time" id="start" name="start" value="00:00" />
+                        </p>
+                        <p>
+                            <label for="end">Час на напускане:</label>
+                            <input type="time" id="end" name="end" value="00:00" />
+                        </p>
+                        <input type="hidden" name="restaurantId" value="@Model.Id" />
+                        <button type="submit" class="btn-primary p-2 fw-bold" style="width: 15rem;">Резервирай</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

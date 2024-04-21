@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "DashBoard";
+}
+
+<div class="mt-4 p-5 bg-light text-center">
+    <h2 class="display-4">Hello, @User.Identity.Name!</h2>
+    <hr class="my-4">
+    <a asp-area="Admin" asp-controller="User" asp-action="AllUser"
+       class="btn btn-primary btn-lg">All Users</a>
+    <a asp-area="" asp-controller="Restaurant" asp-action="All"
+       class="btn btn-primary btn-lg">All Restaurants</a>
+    <a asp-area="Admin" asp-controller="Restauranteur" asp-action="AllRequest"
+       class="btn btn-primary btn-lg">All Restaurateur Request</a>
+</div>
+
