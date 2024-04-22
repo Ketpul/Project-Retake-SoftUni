@@ -29,7 +29,6 @@ namespace Project.Infrastructure.Data.SeedDb
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-
             modelBuilder.Entity<Reservation>()
                 .HasOne(e => e.Restaurant)
                 .WithMany()
@@ -68,40 +67,11 @@ namespace Project.Infrastructure.Data.SeedDb
                 .HasForeignKey(e => e.RestaurateurId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder
-                .Entity<Category>()
-                .HasData(new Category()
-                {
-                    Id = 1,
-                    Name = "Бързо хранене"
-                },
-                new Category()
-                {
-                    Id = 2,
-                    Name = "Изискан"
-                },
-                new Category()
-                {
-                    Id = 3,
-                    Name = "Рибен"
-                },
-                new Category()
-                {
-                    Id = 4,
-                    Name = "Кафе"
-                },
-                new Category()
-                {
-                    Id = 5,
-                    Name = "Бар"
-                },
-                new Category
-                {
-                    Id = 6,
-                    Name = "Други"
-                });
+            
 
             modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new RestaurantConfiguration());
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

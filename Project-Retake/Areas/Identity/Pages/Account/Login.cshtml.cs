@@ -6,10 +6,9 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Project.Infrastructure.Data;
 using Project.Infrastructure.Data.Models;
 using System.ComponentModel.DataAnnotations;
- 
+
 
 namespace Project.Areas.Identity.Pages.Account
 {

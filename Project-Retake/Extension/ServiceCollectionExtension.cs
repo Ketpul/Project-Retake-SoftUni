@@ -16,6 +16,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IRestaurateurService, RestaurateurService>();
             services.AddScoped<IReservationService, ReservationService>();
             services.AddScoped<ICommentService, CommentService>();
+            services.AddScoped<IHomeServuce, HomeServuce>();
             
 
             return services;

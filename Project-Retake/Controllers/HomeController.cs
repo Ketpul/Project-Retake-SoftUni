@@ -4,28 +4,23 @@ using Microsoft.EntityFrameworkCore;
 using Project.Infrastructure.Data.SeedDb;
 using Project.Core.Models.OtherViews;
 using System.Diagnostics;
+using Project.Core.Contracts;
 
 namespace Project.Controllers
 {
     public class HomeController : BaseController
     {
-        private readonly ApplicationDbContext data;
+        private readonly IHomeServuce homeServuce;
 
-        public HomeController( ApplicationDbContext _data)
-        {
-            
-            data = _data;
+        public HomeController(IHomeServuce _homeServuce)
+        { 
+            homeServuce = _homeServuce;
         }
 
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
-            var restaurants = await data.Restaurants.OrderByDescending(r => r.AvgRating).Take(3).ToListAsync();
-
-            var model = new HomeIndexViewModel()
-            {
-                Restaurants = restaurants
-            };
+            var model = await homeServuce.IndexAsync();
 
             return View(model);
         }
