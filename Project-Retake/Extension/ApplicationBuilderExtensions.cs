@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Project.Data.Models;
+using Project.Infrastructure.Data.Models;
 using System.Data;
 using static Project.Constants.RoleConstants;
 

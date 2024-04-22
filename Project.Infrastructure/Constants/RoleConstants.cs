@@ -1,0 +1,13 @@
+﻿namespace Project.Infrastructure.Constants
+{
+    public static class RoleConstants
+    {
+        public const string OwnerRole = "Owner";
+
+        public const string AdminRole = "Administrator";
+
+        public const string Restaurateur = "Restaurateur";
+
+        public const string Employee = "Employee";
+    }
+}

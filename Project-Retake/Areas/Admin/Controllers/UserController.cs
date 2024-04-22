@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Project.Areas.Admin.Models;
-using Project.Data.Models;
-using Project.Data.SeedDb;
+using Project.Infrastructure.Data.Models;
+using Project.Infrastructure.Data.SeedDb;
 using static Project.Constants.RoleConstants;
 
 namespace Project.Areas.Admin.Controllers
@@ -11,15 +11,13 @@ namespace Project.Areas.Admin.Controllers
     public class UserController : AdminBaseController
     {
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly RoleManager<IdentityRole> roleManager;
         private readonly ApplicationDbContext data;
 
 
-        public UserController(UserManager<ApplicationUser> _userManager, ApplicationDbContext _data, RoleManager<IdentityRole> _roleManager)
+        public UserController(UserManager<ApplicationUser> _userManager, ApplicationDbContext _data)
         {
             userManager = _userManager;
             data = _data;
-            roleManager = _roleManager;
         }
 
         [HttpGet]

@@ -1,4 +1,4 @@
-﻿using Project.Data.Models;
+﻿using Project.Infrastructure.Data.Models;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Project.Areas.Admin.Models

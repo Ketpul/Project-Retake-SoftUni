@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Project.Areas.Admin.Models;
-using Project.Data.Models;
-using Project.Data.SeedDb;
+using Project.Infrastructure.Data.Models;
+using Project.Infrastructure.Data.SeedDb;
 using System.Data;
 using System.Security.Claims;
-using static Project.Constants.RoleConstants;
+using static Project.Infrastructure.Constants.RoleConstants;
 
 namespace Project.Areas.Admin.Controllers
 {

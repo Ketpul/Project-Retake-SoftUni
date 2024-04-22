@@ -1,20 +1,19 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Project.Data.SeedDb;
-using Project.Models.OtherViews;
+using Project.Infrastructure.Data.SeedDb;
+using Project.Core.Models.OtherViews;
 using System.Diagnostics;
 
 namespace Project.Controllers
 {
     public class HomeController : BaseController
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext data;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext _data)
+        public HomeController( ApplicationDbContext _data)
         {
-            _logger = logger;
+            
             data = _data;
         }
 

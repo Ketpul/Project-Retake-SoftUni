@@ -8,19 +8,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Admin\Data\**" />
     <Compile Remove="Areas\Restauranteur\**" />
+    <Content Remove="Areas\Admin\Data\**" />
     <Content Remove="Areas\Restauranteur\**" />
+    <EmbeddedResource Remove="Areas\Admin\Data\**" />
     <EmbeddedResource Remove="Areas\Restauranteur\**" />
+    <None Remove="Areas\Admin\Data\**" />
     <None Remove="Areas\Restauranteur\**" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.26" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.28" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.28" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.28" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.28" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.28">
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.29" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.29" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.29" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.29" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.29">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -29,12 +33,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Data\" />
     <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="wwwroot\Images\logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Project.Core\Project.Core.csproj" />
+    <ProjectReference Include="..\Project.Infrastructure\Project.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

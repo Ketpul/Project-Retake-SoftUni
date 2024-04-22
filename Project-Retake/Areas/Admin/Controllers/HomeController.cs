@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Project.Data.Models;
-using Project.Data.SeedDb;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Project.Areas.Admin.Controllers
 {

@@ -1,28 +1,25 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Project.Data.Models;
-using Project.Data.SeedDb;
-
-
+using Project.Infrastructure.Data.Models;
+using Project.Infrastructure.Data.SeedDb;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+
+builder.Services.AddApplicationDbContext(builder.Configuration);
+builder.Services.AddApplicationIdentity(builder.Configuration);
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+builder.Services.AddControllersWithViews(options =>
 {
-    options.SignIn.RequireConfirmedAccount = false;
-    options.Password.RequireDigit = false;
-    options.Password.RequireNonAlphanumeric = false;
-    options.Password.RequireUppercase = false;
-})
- .AddRoles<IdentityRole>()
-.AddEntityFrameworkStores<ApplicationDbContext>();
-builder.Services.AddControllersWithViews();
+    options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+});
+
+builder.Services.AddApplicationServices();
+builder.Services.AddMemoryCache();
 
 
 var app = builder.Build();

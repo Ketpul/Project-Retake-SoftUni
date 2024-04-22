@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Project.Data;
-using Project.Data.Models;
+using Project.Infrastructure.Data;
+using Project.Infrastructure.Data.Models;
 using System.ComponentModel.DataAnnotations;
  
 

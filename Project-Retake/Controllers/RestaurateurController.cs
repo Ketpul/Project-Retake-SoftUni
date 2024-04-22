@@ -1,17 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Project.Data.Models;
-using Project.Data.SeedDb;
-using Project.Models.OwnerViews;
+using Project.Core.Contracts;
+using Project.Core.Models.OwnerViews;
+using Project.Infrastructure.Data.SeedDb;
 using System.Security.Claims;
 
 namespace Project.Controllers
 {
     public class RestaurateurController : BaseController
     {
-        private readonly ApplicationDbContext data;
-        public RestaurateurController(ApplicationDbContext _data)
+        
+        private readonly IRestaurateurService restauranteurService;
+        public RestaurateurController(ApplicationDbContext _data, IRestaurateurService _restauranteurService)
         {
-            data = _data;
+            
+            restauranteurService = _restauranteurService;
         }
 
         [HttpGet]
@@ -33,20 +35,10 @@ namespace Project.Controllers
             var userId = GetUserId();
 
 
-            var restaurateur = new RestaurateurRequest()
-            {
-                RestaurateurId = userId,
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                PhoneNumber = model.PhoneNumber,
-                Information = model.Information,
-                DateTime =  DateTime.Now,
-            };
+            var restaurateur = await restauranteurService.AddAsync(model, userId);
 
-            await data.RestaurateursRequests.AddAsync(restaurateur);
-            await data.SaveChangesAsync();
 
-            return RedirectToAction();
+            return RedirectToAction("Index", "Home");
 
         }
 
