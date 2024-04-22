@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Project.Infrastructure.Data.Models;
 
 namespace Project.Infrastructure.Data.SeedDb
@@ -102,6 +101,7 @@ namespace Project.Infrastructure.Data.SeedDb
                     Name = "Други"
                 });
 
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

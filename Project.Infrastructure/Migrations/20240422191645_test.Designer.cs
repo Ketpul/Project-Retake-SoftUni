@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Project.Infrastructure.Data.SeedDb;
 
@@ -11,9 +12,10 @@ using Project.Infrastructure.Data.SeedDb;
 namespace Project.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240422191645_test")]
+    partial class test
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -239,28 +241,9 @@ namespace Project.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "df7c92db-9dec-4483-9b0c-39836de8f44a",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "bd16c8bc-e455-4748-9a27-85aac288e376",
-                            EMPRSID = 0,
-                            Email = "admin@gmail.com",
-                            EmailConfirmed = false,
-                            FirstName = "Admin",
-                            LastName = "Adminov",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ADMIN@GMAIL.COM",
-                            NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGLFerrqSBCzyg5Z/j4mLmVpQfYsNeDNpQzRvus6urOFzq39HvG0MXjHl31YURq+UA==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "071d8649-6cee-433a-9666-f8a15c019411",
-                            TwoFactorEnabled = false,
-                            UserName = "admin@mail.com"
-                        },
-                        new
-                        {
                             Id = "4bc18388-81ca-42ee-a068-f0a4a4c3fb2d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d73ce282-b0da-4fe3-a450-886d36a494a8",
+                            ConcurrencyStamp = "e05360aa-f00c-473a-bc21-7a4291d5a7da",
                             EMPRSID = 0,
                             Email = "Guest@gmail.com",
                             EmailConfirmed = false,
@@ -269,9 +252,9 @@ namespace Project.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "GUEST@GMAIL.COM",
                             NormalizedUserName = "GUEST",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHjQWxKGjE4iUjYqyNcE7MqH/zHAogVkHhhTW3QVDw2t3BZsK+6kbp1Oj7IkhoG5IQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAbTyCXeXTBlYXPrqsNOFOQK9XQDJu5afRVgVJt5LO3lxIfz/h0h5b/Ts96Me66ykQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d499fe9e-b182-4027-96ef-6e0da16acfe4",
+                            SecurityStamp = "58e75d5b-cb4b-4973-9400-bcff02ba2cfd",
                             TwoFactorEnabled = false,
                             UserName = "Guest"
                         });
