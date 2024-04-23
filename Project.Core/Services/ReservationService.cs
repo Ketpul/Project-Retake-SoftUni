@@ -55,7 +55,7 @@ namespace Project.Core.Services
 
             var employeeViewInfoModels = new List<EmployeeInfoViewModel>();
             var users = await userManager.Users.ToListAsync();
-
+            
             foreach (var user in users)
             {
                 bool isEmployee = await userManager.IsInRoleAsync(user, Employee);

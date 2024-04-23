@@ -15,9 +15,9 @@ namespace Project.Infrastructure.Data.SeedDb
         public Category Bar { get; set; }
         public Category Others { get; set; }
 
-        public Restaurant FirstHouse { get; set; }
-        public Restaurant SecondHouse { get; set; }
-        public Restaurant ThirdHouse { get; set; }
+        public Restaurant FirstRestaurant { get; set; }
+        public Restaurant SecondRestaurant { get; set; }
+        public Restaurant ThirdRestaurant { get; set; }
 
         public SeedData()
         {
@@ -97,7 +97,7 @@ namespace Project.Infrastructure.Data.SeedDb
 
         private void SeedRestaurant()
         {
-            FirstHouse = new Restaurant()
+            FirstRestaurant = new Restaurant()
             {
                 Id = 1,
                 Name = "Friends Restaurant",
@@ -114,7 +114,7 @@ namespace Project.Infrastructure.Data.SeedDb
 
             };
 
-            SecondHouse = new Restaurant()
+            SecondRestaurant = new Restaurant()
             {
                 Id = 2,
                 Name = "Тихият кът",
@@ -130,7 +130,7 @@ namespace Project.Infrastructure.Data.SeedDb
                 RegionalCity = RegionalCity.Кюстендѝл
             };
 
-            ThirdHouse = new Restaurant()
+            ThirdRestaurant = new Restaurant()
             {
                 Id = 3,
                 Name = "Пицария Роял",

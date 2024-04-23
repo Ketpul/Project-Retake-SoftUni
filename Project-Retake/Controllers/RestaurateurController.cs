@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Project.Core.Contracts;
 using Project.Core.Models.OwnerViews;
+using Project.Core.Services;
 using Project.Infrastructure.Data.SeedDb;
 using System.Security.Claims;
+using static Project.Infrastructure.Constants.RoleConstants;
 
 namespace Project.Controllers
 {
@@ -10,15 +12,20 @@ namespace Project.Controllers
     {
         
         private readonly IRestaurateurService restauranteurService;
-        public RestaurateurController(ApplicationDbContext _data, IRestaurateurService _restauranteurService)
+
+        public RestaurateurController(IRestaurateurService _restauranteurService)
         {
-            
             restauranteurService = _restauranteurService;
         }
 
         [HttpGet]
         public async Task<IActionResult> Add()
         {
+            if (!User.IsInRole(Restaurateur) && !User.IsInRole(AdminRole))
+            {
+                return Unauthorized();
+            }
+
             var model = new RestaurateurRequestFromViewModel();
 
             return View(model);
@@ -27,6 +34,11 @@ namespace Project.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(RestaurateurRequestFromViewModel model)
         {
+            if (!User.IsInRole(Restaurateur) && !User.IsInRole(AdminRole))
+            {
+                return Unauthorized();
+            }
+
             if (!ModelState.IsValid)
             {
                 return View(model);

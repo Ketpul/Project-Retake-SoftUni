@@ -59,7 +59,7 @@ namespace Project.Infrastructure.Data.SeedDb
                 .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<RestaurateurRequest>()
-                .HasKey(ep => new { ep.RestaurateurId });
+                 .HasKey(ep => new { ep.RestaurateurId });
 
             modelBuilder.Entity<RestaurateurRequest>()
                 .HasOne(e => e.Restaurateur)

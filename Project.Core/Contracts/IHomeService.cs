@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Project.Core.Contracts
 {
-    public interface IHomeServuce
+    public interface IHomeService
     {
         Task<HomeIndexViewModel> IndexAsync();
     }

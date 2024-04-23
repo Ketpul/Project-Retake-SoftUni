@@ -1,18 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Project.Infrastructure.Data.SeedDb;
-using Project.Core.Models.OtherViews;
-using System.Diagnostics;
 using Project.Core.Contracts;
 
 namespace Project.Controllers
 {
     public class HomeController : BaseController
     {
-        private readonly IHomeServuce homeServuce;
+        private readonly IHomeService homeServuce;
 
-        public HomeController(IHomeServuce _homeServuce)
+        public HomeController(IHomeService _homeServuce)
         { 
             homeServuce = _homeServuce;
         }

@@ -3,11 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Project.Core.Contracts;
 using Project.Infrastructure.Data.Common;
 using Project.Infrastructure.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Project.Core.Services
 {

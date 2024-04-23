@@ -134,7 +134,6 @@ namespace Project.Core.Services
         public async Task EditAsync(int restauranteId, RestaurantFormViewModel model)
         {
             var restaurant = await repository.GetByIdAsync<Restaurant>(restauranteId);
-            var category = model.Categories.First(c => c.Id == model.CategoryId);
 
             if (restaurant != null)
             {
@@ -158,9 +157,9 @@ namespace Project.Core.Services
             await repository.SaveChangesAsync();
         }
 
-        public  Task<List<RestaurantInfoViewModel>> FavoriteRestaurantsAsync(int id, string userId)
+        public async Task<List<RestaurantInfoViewModel>> FavoriteRestaurantsAsync(int id, string userId)
         {
-            var restaurants = repository.AllReadOnly<FavoriteRestaurants>()
+            var restaurants = await repository.AllReadOnly<FavoriteRestaurants>()
                 .Where(f => f.UserId == userId)
                 .Select(r => new RestaurantInfoViewModel()
                 {
@@ -208,7 +207,6 @@ namespace Project.Core.Services
         public async Task RemoveFromFavoriteAsync(int id, string userId)
         {
             var favorite = await repository.AllReadOnly<FavoriteRestaurants>().FirstAsync(f => f.RestaurantId == id && f.UserId == userId);
-
 
             await repository.RemoveFavoriteRestaurantAsync(favorite);
             await repository.SaveChangesAsync();

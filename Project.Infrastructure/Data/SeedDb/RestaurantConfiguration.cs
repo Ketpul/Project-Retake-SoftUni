@@ -11,7 +11,7 @@ namespace Project.Infrastructure.Data.SeedDb
             var data = new SeedData();
 
 
-            builder.HasData(new Restaurant[] { data.ThirdHouse, data.FirstHouse, data.SecondHouse });
+            builder.HasData(new Restaurant[] { data.ThirdRestaurant, data.FirstRestaurant, data.SecondRestaurant });
         }
     }
 }

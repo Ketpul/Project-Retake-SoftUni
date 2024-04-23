@@ -9,6 +9,7 @@ using System.Security.Claims;
 using static Project.Constants.RoleConstants;
 using static Project.Constants.MessageConstants;
 using Project.Core.Contracts;
+using Project.Core.Services;
 
 
 namespace Project.Controllers
@@ -19,7 +20,6 @@ namespace Project.Controllers
 
         public ReservationController(IReservationService _reservationService)
         {
-            
             reservationService = _reservationService;
         }
 
@@ -89,6 +89,11 @@ namespace Project.Controllers
 
         public async Task<IActionResult> AllUsers()
         {
+            if (!User.IsInRole(Restaurateur) && !User.IsInRole(AdminRole))
+            {
+                return Unauthorized();
+            }
+
             var employeeViewInfoModels = await reservationService.AllUsersAsync(GetUserId());
 
             return View(employeeViewInfoModels);
@@ -107,6 +112,10 @@ namespace Project.Controllers
         [HttpGet]
         public async Task<IActionResult> AllReservation()
         {
+            if (!User.IsInRole(Employee))
+            {
+                return Unauthorized();
+            }
 
             var reservations = await reservationService.AllReservationAsync(GetUserId());
 

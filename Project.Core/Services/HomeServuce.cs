@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace Project.Core.Services
 {
-    public class HomeServuce : IHomeServuce
+    public class HomeService : IHomeService
     {
         private readonly IRepository repository;
 
-        public HomeServuce(IRepository _repository)
+        public HomeService(IRepository _repository)
         {
             repository = _repository;
         }
