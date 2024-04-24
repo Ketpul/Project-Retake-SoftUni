@@ -21,11 +21,6 @@ namespace Project.Controllers
         [HttpGet]
         public async Task<IActionResult> Add()
         {
-            if (!User.IsInRole(Restaurateur) && !User.IsInRole(AdminRole))
-            {
-                return Unauthorized();
-            }
-
             var model = new RestaurateurRequestFromViewModel();
 
             return View(model);
@@ -34,11 +29,6 @@ namespace Project.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(RestaurateurRequestFromViewModel model)
         {
-            if (!User.IsInRole(Restaurateur) && !User.IsInRole(AdminRole))
-            {
-                return Unauthorized();
-            }
-
             if (!ModelState.IsValid)
             {
                 return View(model);

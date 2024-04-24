@@ -44,11 +44,6 @@ namespace Project.Core.Services
                 restaurantsQuery = restaurantsQuery.Where(r => r.AvgRating == rating);
             }
 
-            if (!string.IsNullOrEmpty(city))
-            {
-                restaurantsQuery = restaurantsQuery.Where(r => r.RegionalCity.ToString() == city);
-            }
-
             var restaurants = await restaurantsQuery.Select(r => new RestaurantInfoViewModel()
             {
                 Id = r.Id,
@@ -63,6 +58,11 @@ namespace Project.Core.Services
                 City = r.RegionalCity.ToString(),
                 Rating = r.AvgRating,
             }).ToListAsync();
+
+            if (!string.IsNullOrEmpty(city))
+            {
+                restaurants = restaurants.Where(r => r.City == city).ToList();
+            }
 
             return restaurants;
         }
