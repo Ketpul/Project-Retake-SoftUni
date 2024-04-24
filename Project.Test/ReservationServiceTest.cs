@@ -32,6 +32,7 @@ namespace Project.Test
             var userStore = new UserStore<ApplicationUser>(applicationDbContext);
             userManager = new UserManager<ApplicationUser>(userStore, null, null, null, null, normalizer, null, null, null);
 
+
             applicationDbContext.Database.EnsureDeleted();
             applicationDbContext.Database.EnsureCreated();
         }
@@ -49,6 +50,8 @@ namespace Project.Test
             Assert.AreEqual("Guest", listComment[1].UserName);
         }
         
+
+        
         [Test]
         public async Task AllReservationAsyncTestNULL()
         {
@@ -65,7 +68,7 @@ namespace Project.Test
         [TearDown]
         public void TearDown()
         {
-            applicationDbContext.Dispose();
+           applicationDbContext.Dispose();
         }
     }
 }

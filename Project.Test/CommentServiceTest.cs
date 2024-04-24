@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using NUnit.Framework;
@@ -24,7 +25,12 @@ namespace Project.Test
                 .UseInMemoryDatabase("ProjectDB")
                 .Options;
 
+
             applicationDbContext = new ApplicationDbContext(contextOptions);
+
+            var normalizer = new UpperInvariantLookupNormalizer();
+            var userStore = new UserStore<ApplicationUser>(applicationDbContext);
+            userManager = new UserManager<ApplicationUser>(userStore, null, null, null, null, normalizer, null, null, null);
 
             applicationDbContext.Database.EnsureDeleted();
             applicationDbContext.Database.EnsureCreated();
@@ -33,23 +39,23 @@ namespace Project.Test
         [Test]
         public async Task AddCommentAsyncTest()
         {
-            //var repository = new Repository(applicationDbContext); // Assuming this is already done in Setup
-            //commentService = new CommentService(repository, userManager);
+            var repository = new Repository(applicationDbContext); 
+            commentService = new CommentService(repository, userManager);
 
-            //var comment = new Comment()
-            //{
-            //    info = "commentText",
-            //    UserName = "user.UserName",
-            //    RestaurantId = 1,
-            //    Rating = 5
-            //};
+            var comment = new Comment()
+            {
+                info = "commentText",
+                UserName = "user.UserName",
+                RestaurantId = 1,
+                Rating = 5
+            };
 
-            //await commentService.AddCommentAsync("commentText", 1, 5, "df7c92db-9dec-4483-9b0c-39836de8f44a");
-            //await repository.SaveChangesAsync(); // Should work now
+            await commentService.AddCommentAsync("commentText", 1, 5, "df7c92db-9dec-4483-9b0c-39836de8f44a");
+            await repository.SaveChangesAsync(); 
 
-            //var currentComment = await repository.AllReadOnly<Comment>().FirstAsync();
+            var currentComment = await repository.AllReadOnly<Comment>().FirstAsync();
 
-            //Assert.AreEqual(comment.info, currentComment.info);
+            Assert.AreEqual(comment.info, currentComment.info);
         }
 
         [TearDown]
