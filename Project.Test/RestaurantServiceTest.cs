@@ -103,6 +103,37 @@ namespace Project.Test
             Assert.AreEqual("Name", exist.Name);
             Assert.AreEqual("df7c92db-9dec-4483-9b0c-39836de8f44a", exist.RestaurateurId);
         }
+        
+        [Test]
+        public async Task DeleteAsyncTest()
+        {
+            var repository = new Repository(applicationDbContext);
+            restaurantService = new RestaurantService(repository, userManager);
+
+            var model = new RestaurantFormViewModel()
+            {
+                Name = "Name",
+                ImageUrl1 = "ImageUrl1",
+                ImageUrl2 = "ImageUrl2",
+                ImageUrl3 = "ImageUrl3",
+                Address = "Address",
+                Description = "DescriptionDescription",
+                GoogleMaps = "GoogleMaps",
+                Restaurateur = "Restaurateur",
+                RegionalCity = RegionalCity.Благо̀евград,
+                CategoryId = 1,
+            };
+
+            var exist = await restaurantService.CreateAsync(model, "df7c92db-9dec-4483-9b0c-39836de8f44a");
+
+            var restaurant = await restaurantService.GetRestaurantByNameAsync("Name");
+
+            await restaurantService.DeleteAsync(restaurant.Id);
+
+            var existrestaurant = await restaurantService.ExistsAsync(restaurant.Id);
+
+            Assert.AreEqual(false, existrestaurant);
+        }
 
         [Test]
         public async Task FavoriteRestaurantsAsyncTest()
@@ -129,6 +160,7 @@ namespace Project.Test
 
             Assert.AreEqual(true, exist);
         }
+        
 
         [Test]
         public async Task AddFavoriteRestaurantsExistAsyncTestFalse()

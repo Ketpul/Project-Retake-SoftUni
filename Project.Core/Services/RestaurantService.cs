@@ -175,7 +175,6 @@ namespace Project.Core.Services
                 })
                 .ToListAsync();
 
-
             return restaurants;
         }
 
@@ -240,6 +239,10 @@ namespace Project.Core.Services
         public async Task<Restaurant> GetRestaurantByIdAsync(int id)
         {
            return await repository.AllReadOnly<Restaurant>().FirstAsync(r => r.Id == id);
+        }
+        public async Task<Restaurant> GetRestaurantByNameAsync(string name)
+        {
+           return await repository.AllReadOnly<Restaurant>().FirstAsync(r => r.Name == name);
         }
     }
 }

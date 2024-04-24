@@ -23,6 +23,7 @@ namespace Project.Core.Services
             var user = await userManager.FindByNameAsync(userName);
             var restaurant = await repository.AllReadOnly<Restaurant>().FirstAsync(c => c.Name == restaurantName);
 
+            
             user.EMPRSID = restaurant.Id;
             await userManager.AddToRoleAsync(user, Employee);
 
@@ -112,11 +113,8 @@ namespace Project.Core.Services
 
             };
 
-
             await repository.AddAsync(reservation);
             await repository.SaveChangesAsync();
-
-            
         }
 
         public async Task YesAsync(string phoneNumber)

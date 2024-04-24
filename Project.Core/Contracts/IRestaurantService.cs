@@ -1,6 +1,7 @@
 ﻿using Project.Core.Models.OtherViews;
 using Project.Core.Models.RestaurantViews;
 using Project.Infrastructure.Data.Models;
+using System.Threading.Tasks;
 
 namespace Project.Core.Contracts
 {
@@ -31,5 +32,7 @@ namespace Project.Core.Contracts
         Task<RestaurantFormViewModel> GetEditViewModelAsync(int id);
 
         Task<Restaurant> GetRestaurantByIdAsync(int id);
+
+        Task<Restaurant> GetRestaurantByNameAsync(string name);
     }
 }
