@@ -63,30 +63,6 @@ namespace Project.Controllers
         }
 
 
-        //public async Task<IActionResult> Confirm(string id)
-        //{
-
-        //    var restaurateur = await users.FindByIdAsync(id);
-        //    var restaurateurRequests = await data.RestaurateursRequests.FirstAsync(o => o.RestaurateurId == id);
-
-        //    if (restaurateur != null)
-        //    {
-        //        await users.AddToRoleAsync(restaurateur, Constants.RoleConstants.Restaurateur);
-
-
-        //        restaurateur.FirstName = restaurateurRequests.FirstName;
-        //        restaurateur.LastName = restaurateurRequests.LastName;
-        //        restaurateur.PhoneNumber = restaurateurRequests.PhoneNumber;
-
-        //        data.RestaurateursRequests.Remove(restaurateurRequests);
-        //        await data.SaveChangesAsync();
-        //    }
-
-        //    TempData[UserMessageSuccess] = "Confirm!";
-
-        //    return RedirectToAction(nameof(AllReservation));
-        //}
-
         public async Task<IActionResult> AllUsers()
         {
             if (!User.IsInRole(Restaurateur) && !User.IsInRole(AdminRole))
